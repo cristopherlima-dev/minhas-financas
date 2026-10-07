@@ -1,0 +1,7 @@
+# Arquivos de apoio do Claude (mockups, rascunhos) – não vão para o GitHub
+Claude outputs/
+
+# Lixo do sistema / editor
+Thumbs.db
+desktop.ini
+.vscode/
