@@ -95,7 +95,7 @@
           </div>
 
           <label for="lanc-valor">Valor</label>
-          <input id="lanc-valor" class="valor" type="text" inputmode="decimal"
+          <input id="lanc-valor" class="valor" type="text" inputmode="numeric"
                  placeholder="R$ 0,00" autocomplete="off" required>
 
           <label for="lanc-data">Data</label>
@@ -143,7 +143,7 @@
 
           <p id="cat-erro" class="erro" hidden></p>
 
-          <button type="submit" class="btn btn-primario">Salvar</button>
+          <button id="btn-cat-salvar" type="submit" class="btn btn-primario">Salvar</button>
           <button id="btn-cat-excluir" type="button" class="btn btn-perigo" hidden>Excluir</button>
           <button id="btn-cat-cancelar" type="button" class="btn btn-secundario" hidden>Cancelar</button>
         </form>
@@ -167,6 +167,17 @@
       <button type="button" data-tela="form"><i>➕</i>Novo</button>
       <button type="button" data-tela="categorias"><i>🏷️</i>Categorias</button>
     </nav>
+  </div>
+
+  <!-- Janela de confirmação (substitui o confirm() do navegador) -->
+  <div id="modal" class="modal" hidden>
+    <div class="modal-caixa" role="dialog" aria-modal="true" aria-labelledby="modal-msg">
+      <p id="modal-msg"></p>
+      <div class="modal-botoes">
+        <button id="modal-cancelar" type="button" class="btn btn-secundario">Cancelar</button>
+        <button id="modal-ok" type="button" class="btn btn-primario">OK</button>
+      </div>
+    </div>
   </div>
 
   <!-- Aviso rápido no rodapé (ex.: "Salvo!") -->

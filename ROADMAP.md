@@ -30,8 +30,8 @@ Legenda: ✅ concluído · 🔄 em andamento · ⬜ a fazer
 
 - ✅ `config.js` – URL e publishable key do Supabase
 - ✅ `index.html` – estrutura das telas
-- 🔄 `style.css` – visual
-- ⬜ `app.js` – lógica (login, mês, lançamentos, categorias)
+- ✅ `style.css` – visual
+- ✅ `app.js` – lógica (login, mês, lançamentos, categorias)
 - ⬜ `manifest.json` – instalação como app
 - ⬜ `sw.js` – service worker (rede primeiro, cache versionado)
 - ⬜ Ícones (`icons/`)
