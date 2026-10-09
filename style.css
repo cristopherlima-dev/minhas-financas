@@ -1,0 +1,345 @@
+/* =====================================================================
+   Minhas Finanças – visual
+   Coluna de até 520px: ocupa a tela toda no celular e fica
+   centralizada no PC.
+   ===================================================================== */
+
+/* ---------- 1. Cores e medidas (mudar aqui muda o app todo) ---------- */
+:root {
+  --fundo:      #eef1f5;
+  --card:       #ffffff;
+  --texto:      #1f2937;
+  --suave:      #6b7280;
+  --linha:      #e5e7eb;
+  --primaria:   #2563eb;
+  --entrada:    #15803d;
+  --entrada-bg: #dcfce7;
+  --saida:      #b91c1c;
+  --saida-bg:   #fee2e2;
+  --pendente:   #fffbeb;
+  --tag-bg:     #fef3c7;
+  --tag-txt:    #92400e;
+
+  --largura:    520px;
+  --raio:       14px;
+  --menu-alt:   64px;
+}
+
+/* ---------- 2. Base ---------- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* Garante que "hidden" sempre esconde, mesmo com display definido abaixo */
+[hidden] { display: none !important; }
+
+html, body { height: 100%; }
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--fundo);
+  color: var(--texto);
+  font-size: 15px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button, input { font: inherit; color: inherit; }
+button { cursor: pointer; border: none; background: none; }
+
+/* ---------- 3. Estrutura: coluna central ---------- */
+#app, .login {
+  max-width: var(--largura);
+  margin: 0 auto;
+  min-height: 100%;
+}
+
+main {
+  padding: 14px 14px calc(var(--menu-alt) + 20px);
+}
+
+/* ---------- 4. Topo ---------- */
+.topo {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  background: var(--primaria);
+  color: #fff;
+}
+.topo h1 { font-size: 18px; font-weight: 700; }
+.topo-btn { color: #fff; opacity: .9; font-size: 14px; padding: 4px 8px; }
+
+/* ---------- 5. Menu inferior (fixo, mesma largura da coluna) ---------- */
+.menu {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: var(--largura);
+  height: var(--menu-alt);
+  display: flex;
+  background: #fff;
+  border-top: 1px solid var(--linha);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.menu button {
+  flex: 1;
+  font-size: 12px;
+  color: var(--suave);
+}
+.menu button i { display: block; font-style: normal; font-size: 20px; }
+.menu button.ativo { color: var(--primaria); font-weight: 600; }
+
+/* ---------- 6. Cartões, botões, mensagens ---------- */
+.card {
+  background: var(--card);
+  border-radius: var(--raio);
+  padding: 14px;
+  margin-bottom: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.06);
+}
+.card h3 { font-size: 14px; margin-bottom: 6px; }
+
+.btn {
+  display: block;
+  width: 100%;
+  padding: 13px;
+  margin-top: 12px;
+  border-radius: 12px;
+  font-weight: 600;
+  text-align: center;
+}
+.btn-primario   { background: var(--primaria); color: #fff; }
+.btn-perigo     { background: #fff; color: var(--saida); border: 1px solid #fecaca; margin-top: 8px; }
+.btn-secundario { background: transparent; color: var(--suave); margin-top: 4px; }
+.btn:disabled   { opacity: .6; cursor: default; }
+
+.erro  { color: var(--saida); font-size: 14px; margin-top: 10px; }
+.vazio { color: var(--suave); text-align: center; margin: 24px 0; }
+
+.txt-entrada, .pos { color: var(--entrada); }
+.txt-saida,   .neg { color: var(--saida); }
+
+/* ---------- 7. Campos de formulário ---------- */
+label { display: block; font-size: 13px; color: var(--suave); margin: 14px 0 5px; }
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"] {
+  width: 100%;
+  padding: 11px 12px;
+  background: #fff;
+  border: 1px solid var(--linha);
+  border-radius: 10px;
+  font-size: 16px;            /* 16px evita o zoom automático no celular */
+}
+input:focus { outline: 2px solid var(--primaria); outline-offset: -1px; }
+
+input.valor { font-size: 24px; font-weight: 700; text-align: center; }
+
+.linha { display: flex; gap: 6px; }
+.linha .emoji { width: 56px; flex: none; text-align: center; font-size: 20px; }
+
+/* Caixa "Já paga / Já recebida" */
+.check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+  padding: 12px;
+  background: #fff;
+  border: 1px solid var(--linha);
+  border-radius: 10px;
+  font-size: 15px;
+  color: var(--texto);
+}
+.check input { width: 22px; height: 22px; accent-color: var(--entrada); }
+
+/* Seletor Entrada / Saída (os "radio" ficam escondidos; o span é o botão) */
+.segmento {
+  display: flex;
+  background: #e2e8f0;
+  border-radius: 10px;
+  padding: 3px;
+  margin: 4px 0 8px;
+}
+.segmento label { flex: 1; margin: 0; }
+.segmento input { position: absolute; opacity: 0; pointer-events: none; }
+.segmento span {
+  display: block;
+  padding: 9px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--suave);
+}
+.segmento input[value="entrada"]:checked + span { background: #fff; color: var(--entrada); }
+.segmento input[value="saida"]:checked   + span { background: #fff; color: var(--saida); }
+
+/* Categorias no formulário de lançamento (montadas pelo app.js) */
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip {
+  padding: 7px 11px;
+  background: #fff;
+  border: 1px solid var(--linha);
+  border-radius: 999px;
+  font-size: 14px;
+}
+.chip.sel {
+  border-color: var(--primaria);
+  background: #eff6ff;
+  color: var(--primaria);
+  font-weight: 600;
+}
+
+/* ---------- 8. Tela de login ---------- */
+.login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 32px 24px;
+}
+.login-logo { text-align: center; font-size: 48px; }
+.login h1   { text-align: center; font-size: 22px; margin: 6px 0 12px; }
+
+/* ---------- 9. Tela Mês ---------- */
+.mes-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.mes-nav h2 { font-size: 18px; }
+.mes-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #fff;
+  font-size: 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.1);
+}
+
+.resumo { text-align: center; }
+.resumo > small { color: var(--suave); font-size: 13px; }
+.saldo-valor { font-size: 30px; font-weight: 700; margin: 2px 0 12px; }
+
+.totais { display: flex; gap: 8px; }
+.total { flex: 1; padding: 8px; border-radius: 10px; font-size: 12px; }
+.total b { display: block; font-size: 15px; }
+.total small { display: block; font-size: 11px; opacity: .85; margin-top: 2px; }
+.total-entrada { background: var(--entrada-bg); color: var(--entrada); }
+.total-saida   { background: var(--saida-bg);   color: var(--saida); }
+
+.previsto {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--linha);
+  font-size: 13px;
+  color: var(--suave);
+}
+.previsto b { color: var(--texto); }
+
+/* Lista de lançamentos (itens montados pelo app.js) */
+.dia {
+  margin: 14px 2px 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--suave);
+  text-transform: uppercase;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  margin-bottom: 6px;
+  background: #fff;
+  border-radius: 12px;
+  cursor: pointer;
+}
+.item.pendente { background: var(--pendente); }
+.item.pendente .item-val { opacity: .75; }
+
+/* Bolinha ✓ (marca/desmarca pago ou recebido) */
+.item-check {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2px solid #cbd5e1;
+  color: #fff;
+  font-size: 13px;
+  display: grid;
+  place-items: center;
+}
+.item-check.ok { background: var(--entrada); border-color: var(--entrada); }
+
+.item-ic {
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #f1f5f9;
+  display: grid;
+  place-items: center;
+  font-size: 17px;
+}
+.item-tx { flex: 1; min-width: 0; }
+.item-tx b {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.item-tx small { font-size: 12px; color: var(--suave); }
+.item-val { font-size: 14px; font-weight: 700; white-space: nowrap; }
+
+.tag {
+  display: inline-block;
+  margin-left: 4px;
+  padding: 1px 6px;
+  border-radius: 6px;
+  background: var(--tag-bg);
+  color: var(--tag-txt);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* ---------- 10. Tela Categorias (linhas montadas pelo app.js) ---------- */
+.cat-linha {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 2px;
+  border-bottom: 1px solid var(--linha);
+  cursor: pointer;
+}
+.cat-linha:last-child { border-bottom: none; }
+.cat-linha .cat-nome { flex: 1; }
+.cat-linha .cat-editar { color: var(--suave); font-size: 18px; }
+.cat-linha.inativa { opacity: .5; }
+.cat-linha.inativa .cat-nome::after { content: " (inativa)"; font-size: 12px; }
+
+/* ---------- 11. Aviso rápido ---------- */
+.aviso {
+  position: fixed;
+  left: 50%;
+  bottom: calc(var(--menu-alt) + 16px);
+  transform: translateX(-50%);
+  z-index: 20;
+  padding: 10px 18px;
+  background: #1f2937;
+  color: #fff;
+  border-radius: 999px;
+  font-size: 14px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.2);
+}
