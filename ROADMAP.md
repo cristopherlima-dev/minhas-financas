@@ -25,6 +25,7 @@ Legenda: ✅ concluído · 🔄 em andamento · ⬜ a fazer
 - ✅ `sql/supabase-financas.sql`: tabelas `fin_categorias` e `fin_lancamentos`
 - ✅ Segurança (RLS): cada usuário só acessa os próprios dados
 - ✅ Categorias iniciais inseridas
+- ✅ `sql/fin-002-categorias-padrao.sql`: categorias padrão (só ativar/desativar, nunca excluir)
 
 ## Fase 4 – Aplicativo 🔄
 
@@ -32,6 +33,7 @@ Legenda: ✅ concluído · 🔄 em andamento · ⬜ a fazer
 - ✅ `index.html` – estrutura das telas
 - ✅ `style.css` – visual
 - ✅ `app.js` – lógica (login, mês, lançamentos, categorias)
+- ✅ Ajustes pós-teste: janela de confirmação própria, máscara no valor (R$), regras das categorias padrão
 - ⬜ `manifest.json` – instalação como app
 - ⬜ `sw.js` – service worker (rede primeiro, cache versionado)
 - ⬜ Ícones (`icons/`)
@@ -55,3 +57,4 @@ Legenda: ✅ concluído · 🔄 em andamento · ⬜ a fazer
 - Lançamentos recorrentes (ex.: aluguel todo mês)
 - Compras parceladas
 - Saldo acumulado entre meses
+- Cartela de emojis pré-definidos para escolher ao criar categorias
